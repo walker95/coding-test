@@ -8,9 +8,10 @@ def ipStatus(ip, gw):
     now = datetime.now()
     if ping(ip).is_alive:
         if ping(gw).is_alive:
-            return "ip and gw are up.."
+            print("ip and gw are up..")
+            sent = False
         else:
-            return "gw is down. shoot mail..."
+            print("gw is down. shoot mail...")
             mailer()
     else:
         return "ip is down. shoot mail..."
