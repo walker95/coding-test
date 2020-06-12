@@ -1,0 +1,113 @@
+# image: python:latest
+image: python:3.7
+cache:
+  paths:
+    - .cache/pip
+    - venv/
+before_script:
+  - apt-get update   
+  - uname -a
+  - python --version
+   # - echo "Python virtualenv started installing & Activate"
+  # - pip install virtualenv
+  # - virtualenv venv
+  # - source venv/bin/activate
+  # - echo "Pip packages starting installing"
+  # - pip install -r requirements.txt
+  # - pip freeze
+  # - python manage.py runserver
+  - 'which ssh-agent || ( apt-get install openssh-client -y )'
+  - eval $(ssh-agent -s)
+  # - 'which curl || (apt-get update -y && apt-get install -y curl )'
+  - 'which rsync || (apt-get update -y && apt-get install -y rsync )'
+  - echo $CI_JOB_STAGE
+  - echo $CI_JOB_ID
+  - echo $CI_COMMIT_REF_NAME
+  - echo $CI_JOB_NAME
+  - echo $CI_PROJECT_NAME
+  - echo $CI_PROJECT_TITLE
+  - echo $CI_RUNNER_ID
+  - echo $CI_RUNNER_TAGS
+  - echo $CI_SERVER_HOST
+  - echo $GITLAB_USER_EMAIL
+stages:
+  - build
+  - test
+  - develop-deploy
+  - prod-deploy
+  - cleanup
+DEVELOPMENT:
+  stage: develop-deploy
+  script:
+    - ssh-add <(echo "$BB_V2_PRIVATE_SSH_KEY")
+    - mkdir -p ~/.ssh
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+    - ssh_connection='ubuntu@139.59.47.94' 
+    - mkdir -p ../bbv2developgz
+    - cp -r ./*  ../bbv2developgz/
+    - cd ../ && tar -czf bbv2developgz.tar.gz bbv2developgz
+    - rsync -avz --progress bbv2developgz.tar.gz $ssh_connection:/home/ubuntu/SKYBB/
+    - ssh $ssh_connection 'cd /home/ubuntu/SKYBB/ && tar -xzf bbv2developgz.tar.gz && rsync -a bbv2developgz/* api/ && rm -f bbv2developgz.tar.gz && rm -fr bbv2developgz && cd api/ && sudo supervisorctl restart bbapi && sudo supervisorctl restart bbcelery && sudo supervisorctl restart bbcelery_hindi_notif && sudo supervisorctl restart bbcelery_notif && exit'
+  only:
+    - develop 
+  environment: development
+DJANGO_APP_1:
+  stage: prod-deploy
+  script:
+    - ssh-add <(echo "$BB_PROD_APP1_PRIVATE_SSH_KEY")
+    - mkdir -p ~/.ssh
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+    - ssh_connection='ubuntu@142.93.217.7' 
+    - mkdir -p ../bbV2APP1gz
+    - cp -r ./*  ../bbV2APP1gz/
+    - cd ../ && tar -czf bbV2APP1gz.tar.gz bbV2APP1gz
+    - rsync -avz --progress bbV2APP1gz.tar.gz $ssh_connection:/home/ubuntu/BBV2APP1/
+    - ssh $ssh_connection 'cd /home/ubuntu/BBV2APP1/ && tar -xzf bbV2APP1gz.tar.gz && rsync -a bbV2APP1gz/* api/ && rm -f bbV2APP1gz.tar.gz && rm -fr bbV2APP1gz && cd api/ && sudo supervisorctl restart bbapi && sudo supervisorctl restart api && sudo supervisorctl restart bbcelery && sudo supervisorctl restart bbcelery_hindi_notif && sudo supervisorctl restart bbcelery_notif && exit'
+  only:
+    - prod
+  environment: production
+DJANGO_APP_2:
+  stage: prod-deploy
+  script:
+    - ssh-add <(echo "$BB_PROD_APP2_PRIVATE_SSH_KEY")
+    - mkdir -p ~/.ssh
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+    - ssh_connection='ubuntu@142.93.211.47' 
+    - mkdir -p ../bbV2APP2gz
+    - cp -r ./*  ../bbV2APP2gz/
+    - cd ../ && tar -czf bbV2APP2gz.tar.gz bbV2APP2gz
+    - rsync -avz --progress bbV2APP2gz.tar.gz $ssh_connection:/home/ubuntu/BBV2APP2/
+    - ssh $ssh_connection 'cd /home/ubuntu/BBV2APP2/ && tar -xzf bbV2APP2gz.tar.gz && rsync -a bbV2APP2gz/* api/ && rm -f bbV2APP2gz.tar.gz && rm -fr bbV2APP2gz && cd api/ && sudo supervisorctl restart bbapi && sudo supervisorctl restart api && sudo supervisorctl restart bbcelery && sudo supervisorctl restart bbcelery_hindi_notif && sudo supervisorctl restart bbcelery_notif && exit'
+  only:
+    - prod
+  environment: production
+ELASTICSEARCH_KIBANA:
+  stage: prod-deploy
+  script:
+    - ssh-add <(echo "$BB_ELK_PRIVATE_SSH_KEY")
+    - mkdir -p ~/.ssh
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+    - ssh_connection='ubuntu@134.209.146.252' 
+    - mkdir -p ../bbv2elkgz
+    - cp -r ./*  ../bbv2elkgz/
+    - cd ../ && tar -czf bbv2elkgz.tar.gz bbv2elkgz
+    - rsync -avz --progress bbv2elkgz.tar.gz $ssh_connection:/home/ubuntu/BBELK/
+    - ssh $ssh_connection 'cd /home/ubuntu/BBELK/ && tar -xzf bbv2elkgz.tar.gz && rsync -a bbv2elkgz/* api/ && rm -f bbv2elkgz.tar.gz && rm -fr bbv2elkgz && cd api/ && sudo supervisorctl restart bbapi && exit'
+  only:
+    - prod
+  environment: production
+REDIS_CELERY:
+  stage: prod-deploy
+  script:
+    - ssh-add <(echo "$BB_PROD_CELERY_PRIVATE_SSH_KEY")
+    - mkdir -p ~/.ssh
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+    - ssh_connection='ubuntu@139.59.5.197' 
+    - mkdir -p ../bbv2redisgz
+    - cp -r ./*  ../bbv2redisgz/
+    - cd ../ && tar -czf bbv2redisgz.tar.gz bbv2redisgz
+    - rsync -avz --progress bbv2redisgz.tar.gz $ssh_connection:/home/ubuntu/BBV2CELERY/
+    - ssh $ssh_connection 'cd /home/ubuntu/BBV2CELERY/ && tar -xzf bbv2redisgz.tar.gz && rsync -a bbv2redisgz/* api/ && rm -f bbv2redisgz.tar.gz && rm -fr bbv2redisgz && cd api/ && sudo supervisorctl restart bbapi && sudo supervisorctl restart bbcelery && sudo supervisorctl restart bbcelery_hindi_notif && sudo supervisorctl restart bbcelery_notif && exit'
+  only:
+    - prod 
+  environment: production

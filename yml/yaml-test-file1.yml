@@ -1,0 +1,73 @@
+#this will be the first Yml test file
+
+host details:
+      hosts:
+            host-1:
+                  host:
+                          hostname: ind-1
+                  ipDetails:
+                          - privateIp: 10.10.11.11
+                          - netmask: 255.255.255.0
+                          - DNS: 10.10.11.1
+                          - Gateway: 10.10.11.1
+                  Ram: 
+                          - type: DDR4
+                          - capacity: 4 GB
+                  Disk : 
+                          - type: SSD
+                          - capacity: 120 GB
+                  CPU : 
+                          - make: Intel
+                          - tag: Celeron
+            host-2:
+                  host:
+                          hostname: ind-2
+                  ipDetails:
+                          - privateIp: 10.10.11.12
+                          - netmask: 255.255.255.0
+                          - DNS: 10.10.11.1
+                          - Gateway: 10.10.11.1
+                  Ram: 
+                          - type: DDR4
+                          - capacity: 4 GB
+                  Disk: 
+                          - type: SSD
+                          - capacity: 120 GB
+                  CPU: 
+                          - make: Intel
+                          - tag: Celeron
+      Servers:
+              server-1:
+                  server:
+                          - hostname: svr-1
+                  ipDetails:
+                          - privateIp: 10.10.12.11
+                          - netmask: 255.255.255.0
+                          - DNS: 10.10.12.1
+                          - Gateway: 10.10.12.1
+                  Ram: 
+                          - type: DDR4
+                          - capacity: 128 GB
+                  Disk: 
+                          - type: SSD
+                          - capacity: 500 GB
+                  CPU: 
+                          - make: Intel 
+                          - tag: Xeon 
+              server-2:
+                  server:
+                          - hostname: svr-2
+                  ipDetails:
+                          - privateIp: 10.10.12.12
+                          - netmask: 255.255.255.0
+                          - DNS: 10.10.12.1
+                          - Gateway: 10.10.12.1
+                  Ram: 
+                          - type: DDR4
+                          - capacity: 128 GB
+                  Disk: 
+                          - type: SSD
+                          - capacity: 500 GB
+                  CPU: 
+                          - make: Intel
+                          - tag: Xeon

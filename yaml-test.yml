@@ -1,0 +1,16 @@
+peoples:
+  Amit:
+    name:
+      Amit Kumar Singh
+    Age:
+      24
+    Marital-status:
+      unmarried
+  Sumit:
+    name:
+      Sumit Kumar Singh
+    Age:
+      21
+    Marital-status:
+      unmarried
+      

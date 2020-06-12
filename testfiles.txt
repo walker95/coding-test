@@ -1,0 +1,143 @@
+scp sp@192.168.0.230:/home/sp/nreHostConfigure.sh .
+
+echo ' ' | sudo -S  apt update && sudo apt upgrade -y && sudo apt install ncdu sshpass avahi-daemon -y && sudo apt purge snapd -y && sudo apt autoremove -y && sudo reboot
+
+docker run --privileged -v /home/sp:/home/sp -v /dev:/dev -v /etc/localtime:/etc/localtime:ro --name 'tv-detect-final' -dit --restart unless-stopped -h `hostname` -it tv-detect-final.tar:latest /bin/bash
+
+@reboot docker exec -d `docker ps -q` /home/sp/tvTracking/Scripts/start.sh
+
+sshpass -p ' ' ssh -o ConnectTimeout=5 -o StrictHostKeyChecking=no user@host 'command'
+
+ubuntu-18
+
+sudo vi /etc/logrotate.d/tvAdDetect
+
+/home/sp/logs/tvAdDetect*.log {
+  daily
+  rotate 30
+  copytruncate
+  compress
+  missingok
+  notifempty
+  dateext
+}
+
+pip3 install tzupdate
+sudo cp -R ~/.local/lib/python3.6/site-packages/. /usr/lib/python3.6/.
+sudo cp /home/sp/.local/bin/tzupdate /usr/local/bin/tzupdate
+
+cat tvAdDetect | ssh sp@10.10.11.$i "sudo tee -a /etc/logrotate.d/tvAdDetect"
+
+
+
+sudo rsync -arvz -e 'ssh -p 1431' --progress --delete tecmint@192.168.1.103:/backup1 /home/sk/backup2
+
+
+rsync -rave "ssh -i PEMKEYFILE.pem" /path/to/local/files/* ec2user@EC2_INSTANCE_HOSTNAME:/path/to/remote/files
+
+7004857168
+
+
+sshpass -p ' ' StrictHostKeyChecking=no scp sp@192.168.1.101:/home/sp/tvTracking/Scripts/newHostConfigure.sh /home/sp && sshpass -p ' ' StrictHostKeyChecking=no scp sp@192.168.1.101:/home/sp/start /home/sp && chmod a+ x *
+
+
+docker exec -it tv-detect-final date
+
+docker exec -it tv-detect-final sudo dpkg-reconfigure tzdata
+
+sudo chown -R mongodb:mongodb /tmp/mongodb-27017.sock /var/lib/mongodb/
+
+#SSH KAYS
+
+#Vikash
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDW5HUIR63ShdDciJai6zLUtbXwmzpOwShM0D4rGGCROiTTPq1JB+JxVM2NNnh69zP6yqnodN83j+UGsjvCMKcWyi22e36gFzq33C0NRk1XYhePmRYg5V19/FKYu+pNSKsqYgdfclwMq6e/RPiL/+2+v0W6b1xHtZ7ik7op8izZQauJ8w6ljJQzVxarn3HpgqTWcxxMg1ijDlfSGIutA1eTsHk8n5jOgFtYJRXgdJZpH9fkt7GDaDyiPUqwupOp59z2HFVWAiCuramU6FDjJltfnor1a2n19SVT9Sf12/grJYNk8AVIxte2lZjSBWQzhiv/fnYq+DfUxA3QgrmLIt4F
+
+#Varun
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7Df++XbsVh+eO/16C2W/MIM4shhYwycewbHBylJkOB1ZogSLu7pMXM4RfpR7xjBEVGFDd5sTmZq9sGiMCLHvF1m3OP/cqNC+bR5KkO6nrldEeVd7DU8Jv5lKJdvNtaGJ3TQZoSJnSvrK9nOSgztB56i/ml6NN/pbdNgpg0+nBUrPt/+K7MfGxRUyxYathcT6yUJiQqaI8XeawcS2KA3gh3p/pswraXgzLsmCYv5DS/CLVhb64N4DfUfTP+I0FkDjGeUd/1Ak5/Kd8DGFif2i1yHCFO887zf1THOLCYMc3mAfbKYPUgId+UtpSjm4dmEmNq/VtkiXTpZBrKUKsGadd
+
+#Nikhil
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCwq5SvGwM7hHBdUUJeREue4+xNlRl5iKVJVEp03L8CYk5MaUjEuv8kd6z06laeocirz92qgyEi+aWtyE0YfRKf+XDNxqlv6BRmW/yXRfePwBp4+TLfGoyfOYNR4gO5SFjaSftP4xrguk0DOCfRh+cv2AvpEY8MBCRgWRXE9gPGbN3jXiVFiHV+jfU4yeVg4Ug+t4ipB74iprnd5PfrgOdveBZ5r++RR/JLrHwhNt4rPVZgbdnbRdsPuGfpLc13pvYlPg2rRo+zICuvLoP6zDoyT2WKENXv4zJh9vzpKLi3Bz2u5+Nb8MlVDlrYlU0J5KUfDHN2pT91k19z7fSnByTd
+
+#Siddhant
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDuQGOySIohlYSVszq4O8HVGrvVdJwyMK8sVK9iinHXGvrgIP3gMUI+a3++EKqarIsvaEVRvKECqAMSx0csQ5/gNn37Ova+VwE8mWua1NVToFmiZyl1lhIhf1bfczRPZugNEKv+N4jJOwswJWzPi68EvIVO7aQjjaFWNwzfLjD4iiX1XDbXZnygEn5fZYJXUbtbNIFc5grcUF4GBOBfKLp1D+7TMGiZYx8E1p7yqKjl6LEZLRz8YJO4LQWrNYO4I299kjvl7Y9C6rlX9np57/ueQ1nX/Sm9KHmgXyINwYD9Y5cct6jtIhhfMpjOfhAc2RBIQGgor4Qz/NiexHVTwAY1
+
+#Amit
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDE3V1fMYDNb48eRUMPaDbV1ujFkqqpiQ3y5nN88GgS+Sqs9JiJuXOq3nTbb8o6YA4U7YO+w6fd29ptXjegbhhpYRqU6DE4Yf9vXb4GtYyUa3oCwJyVmtNNGMI3gXtyHBVcx0CW614t+9XNkr3Fwi+DvLls9vadsa4T/HHbr6t9gcpSS3uTDUhZ1plLrFAEZ11uHzmGkcDM4ktSqYUVGDVo0PKsZNhAdbDo5XkIdhr36hiW9FQBuZxp4HRPN5ZJeIxSA95wLZUSyMK1bj4WY0pPC2/56ar4TXDFxDUzY/WQz4dx4Ak7PDIvqyp4nO2lfl+zWEkTqIAtP7PXMwx4ct5d
+
+#mirror-prime
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDTcnKo8hfq89VVLlkTjh25Qk47FSmwBliMsT0KaFMEjJC69MKVCXCkoD6xUhVMyvyWJU/AYCWbpOr5Ge+iZ/6rI8/cFt0qO7G2JWAka+i6ZxBvFFIg9B3krNS0Gv8+LMRvyyhg7f/CH7GiG8F2kLw+bRHhh3lhaeZqahGqmkS0XSRUU0miH0+aBD3HJwIwWywhLAiepyQYLyz0bDj2k3FzfbeLjLNdJOij49fsYiDUmBIHQO/iLa76+43IGPMEE1fbc1lRPhBSHIqVvzypmA+eUJlVHrPL3UtXoTTDV+SaDkDjnVcDnU+5MJrqhVOFFp+F3ceNBvqrV3tn6Fu6vfST
+
+#ironhide
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCdX3xto9vogXxVCd+UzFk0E3PNtmIsnwdYHRmbaiOqAf4dJ2L/sqU5zTanuv1F2wW3SrohF6XOG105cklKVEmO6gT6Xyh+Du6NvzQjONeJ3qf1t947NRl40zZeEN5uRDQJ/mVzFVZjwDdfzwHWWrtof7NAUM+m8JLZkUvLaxQHjt/QgbwvDWx7/gr5lAnRi0+zD5lNrlOUqA/8tXx5px9Eo/9cmyqEwBJ5EYprGzqPcbrwUVt4d5DRXyJqjm1bEQ37UClOZOBqoih831p5X27yYma+hCxxXcG7g/Odv/FkOzHBg2lV/q/E7+pDf4SfYvmByzMrlhdMMAkw5elzyJ83
+
+#bumblebee
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC2iH6tmAKRHD2oKPP2IpwUxaABlKFZjUy9M+sFV4tm+lcT/aId4W62mO/MIvrNaJhe3qIwW+OEB5ch6HuHCwUXpEVi2iG6N8g8dpXfNy0OvYJMMgvS7aQT0ypQ5ZIypmTfN/kX91cl4mdh7NB5GifIds9z4TvmaWT/z+zHO1Nfa+MOHqiq+46KbuJ4ZofCublA8oIsm/ewz0UXpOlXgzn2fGT1ykl+c24aL4D8ZINIr0r3o9NLc2erP7DD3KWuLCv5tkTC4XzzkmKUSkyHrGN8AXpm7W7B/nNlWHa+dzPCuTiM0C+P6utfe4bueGCUs8aN4MV4GkR3b/lRFzR7l/Vb
+
+#cybertron
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCjpXodAjAIDtKStjEJCEIg4/GT9gbgz/MfhLxryZ3K0T4Jsl2eAnOea3Z2nL1O7aeQZaWM7/+MU8nGGn8sbqaTT3SR3S73qunbLjCRYD9hQSP8qoQwdcuRRJ3xdytwGJEzhlX9ZsaUpug2OJxW4zODznmc2L9hmv+RQboR4iFm/5oZegI/s9KcgiRXj/ZhLvDsNvifi6mPcw3sRtBlGhXiGBuHFSRF+jSB7IXX4iyyuHKGPWSaUO0whS4PJTWWkfgQxCDOJc0CEx5VAxE/ni6iXN0/HRfELNfZzkj7NuECyyIlc8WAabeCeYT0Q/7+J4CeH15uzZO9Ev9G4DzUfAcr
+
+#thanos
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCv4wH/sFAokJCZMS3Gc0LqI2ypvlNAxAQbRCxq5MMTQWLFXCdDVM6FQqadWy7OOuM7KtqqORAouFQnlJQSNH9K80QfTM++1NidJzJUmAML0sRY2nJFj0vK0w5UIFmpCMqkhAIdoKGBXRS27AO1DS9Dd2wPq/AycIjoivRzos/ZdismsvCCf1mp97kjx0fmVjjVednf+oWkeVwekFOIwlPklwS+fdXOVr18RczWYuKE4AA49KRex6uhPTZCXFEDm8GOX9f0PWBCtukt1EWmvSkrkRGxtx+ZjVnx1o+mhom/wQrGL9jx4QQdFXlqGdm7C7WuTa75H/0AoXe5PZS1oxn9
+
+#Mrigank
+
+AAAAB3NzaC1yc2EAAAADAQABAAABAQDZ3szXQYpIYfaheo6xVEeEc23j/8U8YvReR7Rw7/1SwPXPPyVd9+CsWoQEthkIaRejuZP0zxnniKg21WId1zrdy8QfQ2lf8U6DYyCFjyyAVKzaKwasq3K+F557ihmi5wYYM7iuLSHJg2P7f5aBoU1tt6Oyw9hLddoq8wC4LnVqdautTtS6JcWmXIu1MmzE3mvgi2QF/PPeF4VtxubyLLdRDl+E5O3t3wpGCrsYuH5GyHA8NwzSZkKqPfRlZSMMlcrpi6sZ4mJOu1Tn/N7eyvd8as2+5lYt19Ibik82KJkS0hhiGQLoTtzoGzLFO92Fhj8Mrn2y0SwkrcpMCxGb/cJ3
+
+
+IMP Python PKGs
+
+i)  pendulam
+
+
+
+
+
+
+Issue when adding any NEW server:
+		script location: no location needed./>>>>>did by entering "N/A"
+		category: none needed./>>>>>selected "general entertainement"
+		channel Number: none needed./>>>>>sentered 0("N/A" not working)
+
+Issue when editing any server:
+		language: selected language dissappears./>>>>>selected again
+		Channel Number: If entered "0". dissappears upon editing./>>>>>entered "0" again.
+
+
+
+if [ $size > 2 ]; then echo big; else echo small; fi
+
+
+mongo -u admin 122.160.56.167:38128 --authenticationDatabase admin
+
+  { "name": "Amy", "address": "Apple st 652"},
+  { "name": "Hannah", "address": "Mountain 21"},
+  { "name": "Michael", "address": "Valley 345"},
+  { "name": "Sandy", "address": "Ocean blvd 2"},
+  { "name": "Betty", "address": "Green Grass 1"},
+  { "name": "Richard", "address": "Sky st 331"},
+  { "name": "Susan", "address": "One way 98"},
+  { "name": "Vicky", "address": "Yellow Garden 2"},
+  { "name": "Ben", "address": "Park Lane 38"},
+  { "name": "William", "address": "Central st 954"},
+  { "name": "Chuck", "address": "Main Road 989"},
+  { "name": "Viola", "address": "Sideway 1633"}
+
+https://download.teamviewer.com/download/TeamViewer_Setup.exe
+
+
+
+
+
+
+
+https://cdn.syndication.twimg.com/timeline/profile?callback=__twttr.callbacks.tl_i0_profile_cnnphilippines_new&dnt=false&domain=cnnphilippines.com&lang=en&min_position=1260184466477051905&screen_name=cnnphilippines&suppress_response_codes=true&t=1765873&tz=GMT%2B0530&with_replies=false
