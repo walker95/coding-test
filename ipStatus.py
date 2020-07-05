@@ -1,31 +1,34 @@
 from datetime import datetime
 from icmplib import ping
+import time
 
-ip = '10.10.12.24'
-gw = '10.10.11.22'
-
-def ipStatus(ip, gw):
-    now = datetime.now()
+ip = '10.10.12.253'
+gw = '10.10.12.1'
+def pingIP(ip, gw):
     if ping(ip).is_alive:
         if ping(gw).is_alive:
-            print("ip and gw are up..")
-            sent = False
+            print(ip + gw + "alive")
         else:
-            print("gw is down. shoot mail...")
-            mailer()
+            print(gw + "down")
+            downtime = time.strftime('%M')
+            print(downtime)
     else:
-        return "ip is down. shoot mail..."
-        mailer()
+        print(ip + "down")
+        downtime = time.strftime('%M')
+        print(downtime)
 
-def mailer():
-    sent = False
-    if sent == False:
-        print("mail needs to be sent")
-        mailtime = datetime.now().minute
-    elif datetime.now().minute == mailtime:
-        print("mail needs to be sent")
+pingIP(ip, gw)
 
-ipStatus(ip, gw)
+
+
+        
+
+
+
+
+
+
+
 
 
 
