@@ -1,27 +1,26 @@
 from datetime import datetime
 from icmplib import ping
-import time
+import time, pymongo 
 
-ip = '10.10.12.253'
-gw = '10.10.12.1'
-def pingIP(ip, gw):
-    if ping(ip).is_alive:
-        if ping(gw).is_alive:
-            print(ip + gw + "alive")
-        else:
-            print(gw + "down")
-            downtime = time.strftime('%M')
-            print(downtime)
-    else:
-        print(ip + "down")
-        downtime = time.strftime('%M')
-        print(downtime)
-
-pingIP(ip, gw)
+mongoClient = pymongo.mongoClient("mongodb://localhost:27017")
+db = mongoClient['ipStatus']
+collection = db['IPs']
 
 
 
-        
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

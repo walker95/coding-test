@@ -1,0 +1,7 @@
+loadbalancer===10.10.12.33
+controller1===10.10.12.53
+controller2===10.10.12.54
+worker1===10.10.12.31
+worker2===10.10.12.32
+
+
