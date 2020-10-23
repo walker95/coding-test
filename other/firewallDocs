@@ -1,0 +1,98 @@
+#sample router using Debian system.
+First, let’s make three initial assumptions:
+----------------------------------------------
+COMMENT: eth0 is the public interface (the Cable/DSL modem is attached to this NIC)
+	  	eth1 is the private interface (your switch is connected to this NIC)
+	    All of the client computers, servers, WAPs, etc. are connected to the switch
+1.) Configure the network interfaces
+----------------------------------------------
+COMMENT: Change the “address”, “netmask”, and “broadcast” values to match your internal network preferences
+
+	nano -w /etc/network/interfaces
+	# The external WAN interface (eth0)
+	allow-hotplug eth0
+	iface eth0 inet dhcp
+
+	# The internal LAN interface (eth1)
+	allow-hotplug eth1
+	iface eth1 inet static
+	   address 192.168.0.1
+	   netmask 255.255.255.0
+	   network 192.168.0.0
+	   broadcast 192.168.0.255
+
+2. Install and configure DNSmasq
+----------------------------------------------
+COMMENT: DNSmasq is DNS forwarder and DHCP server. Change “domain” to the FQDN of your network and “dhcp-range” to the desired range of 		DHCP addresses you would like your router to serve out to clients
+
+	apt-get install dnsmasq
+	nano -w /etc/dnsmasq.conf
+	interface=eth1
+	listen-address=127.0.0.1
+	domain=home.andreimatei.com
+	dhcp-range=192.168.0.100,192.168.0.110,12h
+
+3.) Enable IP Forwarding
+----------------------------------------------
+COMMENT: Uncomment the following line:
+
+	nano -w /etc/sysctl.conf
+	net.ipv4.ip_forward=1
+
+4.) Configure iptables
+----------------------------------------------
+COMMENT: We create a file called /etc/iptables.rules and put this rule set inside of it.  As an example, this set includes allowing tcp 		traffic in from the outside world on port 222 (I run SSH on this alternate port) and also port-forwards tcp port 50,000 to 
+		aninternal machine with the ip of 192.168.0.3.  Use this as a guide for your own rules.
+
+	nano -w /etc/iptables.rules
+	*nat
+	-A PREROUTING -i eth0 -p tcp -m tcp --dport 50000 -j DNAT --to-destination 192.168.0.3:50000
+	-A POSTROUTING -o eth0 -j MASQUERADE
+	COMMIT
+
+	*filter
+	-A INPUT -i lo -j ACCEPT
+	-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+	-A INPUT -i eth0 -p tcp -m tcp --dport 222 -j ACCEPT
+	-A INPUT -i eth0 -j DROP
+	-A FORWARD -i eth0 -p tcp -m tcp --dport 50000 -m state --state NEW -j ACCEPT
+	COMMIT
+
+5.) Activate your iptables rules
+----------------------------------------------
+COMMENT: restore iptable rules
+	iptables-restore < /etc/iptables.rules
+
+6.) Ensure iptables rules start on boot
+----------------------------------------------
+COMMENT: Insert the following line into your /etc/network/interfaces file right underneath “iface lo inet loopback”
+
+	nano -w /etc/network/interfaces
+	pre-up iptables-restore < /etc/iptables.rules
+
+7.) Reboot and Verify
+----------------------------------------------
+
+#############################################
+#		  Important Firewall URLs			#
+#############################################
+
+a)https://netbeez.net/blog
+b)https://blog.noviantech.com/category/linux/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

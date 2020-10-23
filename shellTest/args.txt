@@ -1,0 +1,10 @@
+#!/bin/sh
+
+read -p "your name: " name
+if [ $name == $USER ]
+then
+	printf "hello myself\n"
+else
+	printf "hello $name\n"
+fi
+

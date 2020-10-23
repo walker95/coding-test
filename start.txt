@@ -1,3 +1,0 @@
-This is a GIT test file
-
-and th second line is added from MAC

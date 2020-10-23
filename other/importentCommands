@@ -10,3 +10,18 @@ http://polyglot.ninja/rest-api-best-practices-python-flask-tutorial/
 docker run --privileged -v /home/sp:/home/sp -v /dev:/dev -v /etc/localtime:/etc/localtime:ro --name 'tv-detect-final' -dit --restart unless-stopped -h `hostname` -it tv-detect-final.tar:latest /bin/bash
 
 #start postgres after installing
+
+
+
+
+
+#hackingURL
+#http://www.catb.org/~esr/faqs/hacker-howto.html#skills1
+
+#https://linuxsecurity.com/howtos
+
+#https://linuxsecurity.com/howtos
+#https://www.linuxtopia.org/Linux_Firewall_iptables/x651.html
+#https://web.mit.edu/rhel-doc/4/RH-DOCS/rhel-sg-en-4/s1-firewall-ipt-rule.html
+#https://devconnected.com/how-to-setup-telegraf-influxdb-and-grafana-on-linux/
+#
