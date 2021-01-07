@@ -1,0 +1,45 @@
+In this tutorial , we will discuss how we can make our debian machine as a router, provided our machine has alteast two network interfaces. We will demonstrate this using virtual machine.
+
+create a virtual machine
+setup two network interfaces on it.
+        one as bridged adapter—for accessing working network
+        one as internal network–for our local network
+    power on the machine and connect the first interface
+        apt-get install net-tools   (for ifconfig)
+    set up second interface as
+        edit /etc/network/interfaces as
+        auto enp0s8
+        iface enp0s8 inet static
+            address 192.168.7.1
+            netmask 255.255.255.0
+            gateway 192.168.7.1
+            network 192.168.7.0
+        service networking restart—eventhough fail message try ifconfig
+        The new interface is assigned an ip address on this network
+    configure dnsmasq
+        dnsmasq provides both dns and dhcp functionality
+        apt-get install dnsmasq.
+        /etc/dnsmasq.conf
+        interface=enp0s8  —-interface on which dhcp server should listen
+        dhcp-range  192.168.7.50, 192.168.7.150,12h—-beg,end,lease valid time
+        service dnsmasq restart.
+    setup client
+        create another virtual machine with one interface
+        set interface to local network
+        power on the machine
+        connect to network and check the ip you got.
+        dns server is set as the router …which copies from 8.8.8.8
+        client can now connect to any machine in local network , that we created.
+        but not to external network.
+    Enable ip forwarding in router from one interface to another
+        echo 1 > /proc/sys/net/ipv4/ip_forward
+        iptables –table nat –append POSTROUTING –out-interface enp0s3 -j MASQUERADE
+        //specifies translate the address from which the request from local network comes to the router address–after routing to interface enp0s3—masquerading
+        iptables –append FORWARD –in-interface enp0s8 -j ACCEPT
+        //accept all request from interface enp0s8 and forward it.
+        service networking restart to reflect the changes
+    go to localmachin
+        ping 192.168.7.1
+        ping 192.168.1.1
+        ping google.com
+        access the network

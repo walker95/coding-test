@@ -1,0 +1,51 @@
+domain: ci.silverpush.co
+IP: 54.243.149.109
+Status: 'Dead'
+======================================
+domain: cloud.silverpush.co
+IP: 122.160.56.167
+Status: 'Dead'
+======================================
+domain: console.silverpush.co
+IP: 54.225.76.142
+Status: 'Dead'
+======================================
+domain: dashboard.silverpush.co
+IP: 54.204.13.48
+Status: 'Dead'
+======================================
+domain: dpix.silverpush.co
+IP: 54.243.149.109
+Status: 'Dead'
+======================================
+domain: ms.silverpush.co
+IP: 54.243.149.109
+Status: 'Dead'
+======================================
+domain: papi.silverpush.co
+IP: 23.21.201.23
+Status: 'Dead'
+======================================
+domain: parallels1.silverpush.co
+IP: 54.204.13.48
+Status: 'Dead'
+======================================
+domain: perf.silverpush.co
+IP: 101.53.154.68
+Status: 'Dead'
+======================================
+domain: prism.silverpush.co
+IP: 54.163.245.13
+Status: 'Dead'
+======================================
+domain: publisher.silverpush.co
+IP: 107.20.246.123
+Status: 'Dead'
+======================================
+domain: redminecommand.silverpush.co
+IP: 159.89.211.16
+Status: 'Dead'
+======================================
+domain: stgprb.silverpush.co
+IP: 54.92.232.144
+Status: 'Dead'

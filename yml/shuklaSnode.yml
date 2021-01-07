@@ -1,0 +1,9 @@
+version: '3'
+services:
+      appJS:
+          image: 'node'
+          ports:
+              - 5000:3052
+          volumes:
+              - /home/rohit/2020-1-1:/app
+          

@@ -1,0 +1,45 @@
+URLS
+---------
+Chromium---
+
+	https://www.linuxtopia.org/online_books/linux_network_administrators_guide/x-087-2-appl.tcpd.html
+	https://alltop.com/linux
+	https://www.cyberciti.biz/faq/tcp-wrappers-hosts-allow-deny-tutorial/
+	https://github.com/mbertrone/bpf-iptables
+	https://wiki.debian.org/Firewalls
+	https://shorewall.org/
+	http://www.unixwiz.net/techtips/ssh-agent-forwarding.html#fwd
+	https://developer.github.com/v3/guides/using-ssh-agent-forwarding/
+
+firefox---
+
+	https://www.broexperts.com/how-to-perform-incremental-backup-in-linux-using-tar-utility/
+	http://www.mikerubel.org/computers/rsync_snapshots/
+	https://www.jnvilo.com/cms/sysadmin/databases/postgresql/howto-backup-and-restore-your-postgresql-databases/
+	https://puppet.com/blog/speed-up-ssh-by-reusing-connections/
+	https://www.omnisecu.com/tcpip/what-ssh-can-do.php
+	https://www.howtogeek.com/168145/how-to-use-ssh-tunneling/
+	https://ostechnix.com/pigz-compress-and-decompress-files-in-parallel-in-linux/#:~:text=%20Compress%20And%20Decompress%20Files%20In%20Parallel%20Using,have%20any%20option%20to%20directly%20compress...%20More%20
+	https://www.alexkras.com/how-to-read-csv-file-in-python/#:~:text=%20The%20first%20method%20demonstrated%20in%20Python%20docs,%28row%29%20in%20the%20file%2C%20do%20something%20More%20
+	https://www.computernetworkingnotes.com/linux-tutorials/create-and-restore-incremental-backups-in-linux-with-tar.html
+	http://www.mimastech.com/2016/08/06/full-and-incremental-backups-using-tar-linux-command/#:~:text=Full%20and%20Incremental%20Backups%20Using%20Tar%20Linux%20Command,Script%20And%20the%20Retention%20Period%20Script%20Into%20One.
+	https://www.linuxjournal.com/article/7184
+	https://www.linuxjournal.com/article/10235
+
+Chrome---
+	
+	https://monitor.silverpush.co/
+	https://cloud.digitalocean.com/projects/08780103-dfa4-4e6b-959a-79baa3f0ca77/resources?i=cdaf9b
+	https://work.silverpush.co/
+	https://github.com/walker95
+	https://gitlab.com/
+	http://userweb.eng.gla.ac.uk/umer.ijaz/bioinformatics/linux.html
+	https://www.networkworld.com/article/3291616/examining-linux-system-performance-with-dstat.html
+
+opera---
+	http://www.yolinux.com/TUTORIALS/LinuxTutorialNetworking.html
+	https://www.linuxtechi.com/git-command-practical-examples-linux-part-2/
+	https://www.linuxtechi.com/learn-git-command-examples-linux-part-1/
+
+Safari---
+	https://tldp.org/LDP/intro-linux/html/sect_02_02.html

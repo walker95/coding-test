@@ -1,0 +1,61 @@
+version: '3'
+services:
+    mongo:
+        image: parallels/mongo
+        volumes:
+                - /home/rohit/mongo/data/db:/data/db
+        ports:
+                - 27017:27017
+        restart: always
+    redis:
+        image: parallels/redis
+        volumes:
+                - /home/rohit/redis:/data
+        ports:
+                - 6379:6379
+        restart: always 
+    pb2020-1:
+        image: pb/1
+        volumes:
+                - /home/rohit/pb2020-1:/root
+        ports:
+                - 8081:3052
+        restart: always
+        depends_on:
+                - mongo
+                - redis
+    pb2020-2:
+        image: pb/2
+        volumes:
+                - /home/rohit/pb2020-2:/root
+        ports:
+                - 8082:3052
+        restart: always
+        depends_on:
+                - mongo
+                - redis
+    pb2020-3:
+        image: pb/3
+        volumes:
+                - /home/rohit/pb2020-3:/root
+        ports:
+                - 8083:3053
+        restart: always
+        depends_on:
+                - mongo
+                - redis
+                - pb2020-1
+                - pb2020-2
+    pb2020-4:
+        image: pb/4
+        volumes:
+                - /home/rohit/pb2020-4:/root
+        ports:
+                - 8084:3052
+        restart: always
+        depends_on:
+                - mongo
+                - redis
+                - pb2020-1
+                - pb2020-2
+    
