@@ -1,5 +1,45 @@
 #!/usr/bin/env python3
 #requirements: statgrab, nstat, psutil, netifaces, ip
+
+# def metrix():
+#     dict1 = {
+#     "cpu_count": cpu_count(),
+#     "cpu_freq": cpu_freq(),
+#     "cpu_percent": cpu_percent(),
+#     "cpu_stats": cpu_stats(),
+#     "cpu_times": cpu_times(),
+#     "cpu_time_percent": cpu_times_percent()
+#     }
+#     cmd = [ "statgrab", "-F", "ext4,"]
+#     out = Popen(cmd, stdout=PIPE, stderr=STDOUT).stdout.read().decode("utf-8")
+#     for obj in out.splitlines():
+#         obj = obj.replace('.','_').split(" = ")
+#         dict1[obj[0]] = obj[1]
+#         statdict = {
+#                 "_id": "1",
+#                 "stats": dict1
+#                 }
+#     return statdict
+
+
+def metrix():
+    stats = {}
+    cmd = ["statgrab", "-F", "ext4"]
+    out = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).stdout.read().decode('utf-8')
+    for line in out.splitlines():
+        line = line.replace('.', "_").split(" = ")
+        stats[f"{line[0]}"] = line[1]
+    return stats
+
+
+
+
+
+
+
+
+
+
 from subprocess import check_output
 from json import loads
 from psutil import process_iter, cpu_count, cpu_freq, cpu_percent, cpu_stats, cpu_times, cpu_times_percent

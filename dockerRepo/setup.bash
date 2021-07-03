@@ -32,6 +32,7 @@ then
 		echo "$diff\nchanging dir to ../nginx/ssl\n$diff"
 		cd ../nginx/ssl
 		echo "$diff\ncreating rootCA.crt file\n$diff"
+		echo "copy domain's fullchain.pem from '/etc/letsencrypt/archive' directory..."
 		openssl x509 -in fullchain.pem -inform PEM -out rootCA.crt
 		mkdir -p /etc/docker/certs.d/your-domain.com/
 		cp rootCA.crt /etc/docker/certs.d/your-domain.com/
